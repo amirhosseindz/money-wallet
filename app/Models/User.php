@@ -9,6 +9,12 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property string  $name
+ * @property string  $email
+ * @property string  $fb_id
+ * @property boolean $first_login
+ */
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -22,7 +28,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'fb_id'
+        'fb_id',
+        'first_login'
     ];
 
     /**
@@ -57,5 +64,15 @@ class User extends Authenticatable implements MustVerifyEmail
             'fb_id'    => $facebookId,
             'password' => encrypt(Str::random())
         ]);
+    }
+
+    public function firstLoginDone(): void
+    {
+        if (! $this->first_login) {
+            return;
+        }
+
+        $this->first_login = false;
+        $this->save();
     }
 }
