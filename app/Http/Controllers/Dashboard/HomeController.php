@@ -12,7 +12,7 @@ class HomeController extends Controller
             return $redirect;
         }
 
-        return view('dashboard');
+        return view('dashboard.home');
     }
 
     /**
