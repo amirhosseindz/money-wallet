@@ -12,6 +12,12 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
+        @if(session('fb_error'))
+            <div class="font-medium text-red-600">
+                Couldn't login by Facebook!
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
@@ -50,6 +56,14 @@
                 <x-button class="ml-3">
                     {{ __('Log in') }}
                 </x-button>
+            </div>
+
+            {{-- Login with Facebook --}}
+            <div class="flex items-center justify-end mt-4">
+                <a class="btn" href="{{ route('facebook.login') }}"
+                   style="background: #3B5499; color: #ffffff; padding: 10px; width: 100%; text-align: center; display: block; border-radius:3px;">
+                    Login with Facebook
+                </a>
             </div>
         </form>
     </x-auth-card>

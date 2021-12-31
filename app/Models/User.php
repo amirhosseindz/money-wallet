@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -21,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'fb_id'
     ];
 
     /**
@@ -41,4 +43,19 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function findByFacebookId(string $id): ?self
+    {
+        return self::where('fb_id', $id)->first();
+    }
+
+    public static function createByFacebookId(string $name, string $email, string $facebookId): self
+    {
+        return self::create([
+            'name'     => $name,
+            'email'    => $email,
+            'fb_id'    => $facebookId,
+            'password' => encrypt(Str::random())
+        ]);
+    }
 }
