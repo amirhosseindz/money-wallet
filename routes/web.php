@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Dashboard\HomeController as DashboardController;
+use App\Http\Controllers\Dashboard\Wallet\WalletController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,11 +20,9 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    //
+    Route::resource('wallet', WalletController::class);
 });
 
 require __DIR__.'/auth.php';
