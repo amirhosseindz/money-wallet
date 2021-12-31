@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('wallet.create')" :active="request()->routeIs('wallet.create')">
                         Create Wallet
                     </x-nav-link>
+                    <x-nav-link :href="route('wallet.index')" :active="request()->routeIs('wallet.index')">
+                        Wallet List
+                    </x-nav-link>
                 </div>
             </div>
 

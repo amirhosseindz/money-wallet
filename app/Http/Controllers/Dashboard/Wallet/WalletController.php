@@ -16,7 +16,7 @@ class WalletController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.wallet.index', ['wallets' => Wallet::getLatest()]);
     }
 
     /**
@@ -43,7 +43,7 @@ class WalletController extends Controller
             $request->input('type')
         );
 
-        return redirect()->back()->with('wallet_success', true);
+        return redirect(route('wallet.index'))->with('wallet_success', true);
     }
 
     /**

@@ -7,12 +7,6 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <x-dashboard.validation-errors :erros="$errors"/>
 
-                    @if(session('wallet_success'))
-                        <div class="font-medium text-green-600">
-                            Your wallet has been created successfully!
-                        </div>
-                    @endif
-
                     <form method="POST" action="{{ route('wallet.store') }}" class="mt-4">
                         @csrf
 

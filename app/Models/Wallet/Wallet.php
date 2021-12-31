@@ -42,4 +42,9 @@ class Wallet extends Model
             'type' => $type
         ]);
     }
+
+    public static function getLatest()
+    {
+        return self::query()->latest()->get();
+    }
 }
