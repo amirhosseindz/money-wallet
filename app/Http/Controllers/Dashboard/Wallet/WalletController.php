@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard\Wallet;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Wallet\StoreWalletRequest;
+use App\Models\Wallet\Wallet;
 use Illuminate\Http\Request;
 
 class WalletController extends Controller
@@ -24,18 +26,24 @@ class WalletController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.wallet.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreWalletRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StoreWalletRequest $request)
     {
-        //
+        Wallet::createWallet(
+            $this->getAuthenticatedUser(),
+            $request->input('name'),
+            $request->input('type')
+        );
+
+        return redirect()->back()->with('wallet_success', true);
     }
 
     /**
