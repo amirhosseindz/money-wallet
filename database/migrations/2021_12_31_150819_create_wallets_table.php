@@ -13,7 +13,7 @@ class CreateWalletsTable extends Migration
      */
     public function up()
     {
-        Schema::table('wallets', function (Blueprint $table) {
+        Schema::create('wallets', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('name');
