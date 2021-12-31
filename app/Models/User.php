@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Wallet\Wallet;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,6 +11,7 @@ use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
+ * @property-read string $id
  * @property string  $name
  * @property string  $email
  * @property string  $fb_id
@@ -50,6 +52,11 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function wallets()
+    {
+        return $this->hasMany(Wallet::class);
+    }
 
     public static function findByFacebookId(string $id): ?self
     {
