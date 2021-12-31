@@ -5,6 +5,7 @@ namespace App\Models\Wallet;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Webmozart\Assert\Assert;
 
 /**
  * @property-read int    $id
@@ -12,6 +13,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property      string $name
  * @property      string $type
  * @property      float  $balance
+ *
+ * @method static self find(int $id)
  */
 class Wallet extends Model
 {
@@ -46,5 +49,33 @@ class Wallet extends Model
     public static function getLatest()
     {
         return self::query()->latest()->get();
+    }
+
+    public function increaseBalance(float $amount): void
+    {
+        $this->changeBalance($amount);
+    }
+
+    public function decreaseBalance(float $amount): void
+    {
+        $this->changeBalance($amount, true);
+    }
+
+    private function changeBalance(float $amount, bool $decrease = false): void
+    {
+        Assert::greaterThan($amount, 0, 'Invalid Amount');
+
+        if ($decrease) {
+            $amount = -1 * $amount;
+        }
+
+        $this->balance += $amount;
+        if ($this->balance < 0) {
+            throw new \InvalidArgumentException('Balance is not enough');
+        }
+
+        if (! $this->save()) {
+            throw new \Exception('Could not persist the balance');
+        }
     }
 }
