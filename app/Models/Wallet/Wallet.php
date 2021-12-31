@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property      int    $user_id
  * @property      string $name
  * @property      string $type
+ * @property      float  $balance
  */
 class Wallet extends Model
 {
@@ -19,7 +20,8 @@ class Wallet extends Model
     protected $fillable = [
         'user_id',
         'name',
-        'type'
+        'type',
+        'balance'
     ];
 
     public function user()
