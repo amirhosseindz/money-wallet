@@ -11,11 +11,11 @@ use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * @property-read string $id
- * @property string  $name
- * @property string  $email
- * @property string  $fb_id
- * @property boolean $first_login
+ * @property-read int $id
+ * @property string   $name
+ * @property string   $email
+ * @property string   $fb_id
+ * @property boolean  $first_login
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
