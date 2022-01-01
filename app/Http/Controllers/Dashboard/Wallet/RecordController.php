@@ -15,7 +15,7 @@ class RecordController extends Controller
      */
     public function index(Request $request)
     {
-        $wallets = Wallet::getLatest();
+        $wallets = Wallet::getLatest($this->getAuthenticatedUser());
         $selectedWallet = $this->getSelectedWallet($request, $wallets);
 
         return view('dashboard.wallet.record.index', [
@@ -31,7 +31,7 @@ class RecordController extends Controller
     public function create()
     {
         return view('dashboard.wallet.record.create', [
-            'wallets' => Wallet::getLatest(),
+            'wallets' => Wallet::getLatest($this->getAuthenticatedUser()),
             'types'   => Record::TYPES
         ]);
     }

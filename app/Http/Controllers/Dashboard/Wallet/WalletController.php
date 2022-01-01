@@ -14,8 +14,8 @@ class WalletController extends Controller
     public function index()
     {
         return view('dashboard.wallet.index', [
-            'wallets' => Wallet::getLatest(),
-            'totalBalance' => Wallet::getTotalBalance()
+            'wallets'      => Wallet::getLatest($this->getAuthenticatedUser()),
+            'totalBalance' => Wallet::getTotalBalance($this->getAuthenticatedUser())
         ]);
     }
 

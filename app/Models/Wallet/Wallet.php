@@ -37,6 +37,11 @@ class Wallet extends Model
         return $this->hasMany(Record::class);
     }
 
+    public function scopeOfUser($query, User $user)
+    {
+        return $query->where('user_id', $user->id);
+    }
+
     public static function createWallet(User $user, string $name, string $type): self
     {
         return self::create([
@@ -46,14 +51,14 @@ class Wallet extends Model
         ]);
     }
 
-    public static function getLatest()
+    public static function getLatest(User $user)
     {
-        return self::query()->latest()->get();
+        return self::query()->ofUser($user)->latest()->get();
     }
 
-    public static function getTotalBalance(): float
+    public static function getTotalBalance(User $user): float
     {
-        return self::query()->sum('balance');
+        return self::query()->ofUser($user)->sum('balance');
     }
 
     public function increaseBalance(float $amount): void
