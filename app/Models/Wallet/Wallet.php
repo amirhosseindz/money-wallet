@@ -61,6 +61,15 @@ class Wallet extends Model
         return self::query()->ofUser($user)->sum('balance');
     }
 
+    public static function getUserId(int $walletId): ?int
+    {
+        if ($wallet = self::whereId($walletId)->first(['user_id'])) {
+            return $wallet->user_id;
+        }
+
+        return null;
+    }
+
     public function increaseBalance(float $amount): void
     {
         $this->changeBalance($amount);
