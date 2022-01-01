@@ -76,6 +76,7 @@ class Wallet extends Model
 
         $this->balance += $amount;
         if ($this->balance < 0) {
+            $this->balance -= $amount;
             throw new \InvalidArgumentException('Balance is not enough');
         }
 
