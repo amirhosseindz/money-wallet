@@ -18,7 +18,7 @@ class CreateRecordsTable extends Migration
             $table->id();
             $table->foreignId('wallet_id')->constrained();
             $table->enum('type', Record::TYPES)->index();
-            $table->unsignedDecimal('amount', 9);
+            $table->unsignedDecimal('amount', 19);
             $table->timestamps();
         });
     }
