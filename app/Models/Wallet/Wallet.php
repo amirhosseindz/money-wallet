@@ -51,6 +51,11 @@ class Wallet extends Model
         return self::query()->latest()->get();
     }
 
+    public static function getTotalBalance(): float
+    {
+        return self::query()->sum('balance');
+    }
+
     public function increaseBalance(float $amount): void
     {
         $this->changeBalance($amount);

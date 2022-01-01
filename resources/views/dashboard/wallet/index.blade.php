@@ -19,7 +19,7 @@
                                 <th class="px-2 py-4 text-center">Balance</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="border-b-2">
                         @foreach($wallets as $wallet)
                             <tr class="border-b">
                                 <td class="p-2 text-center">{{ $wallet->name }}</td>
@@ -28,6 +28,12 @@
                             </tr>
                         @endforeach
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2"></td>
+                                <td class="p-2 text-center"><b>Total :</b> {{ $totalBalance }}</td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

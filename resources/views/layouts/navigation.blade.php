@@ -18,14 +18,14 @@
                     <x-nav-link :href="route('wallet.create')" :active="request()->routeIs('wallet.create')">
                         Create Wallet
                     </x-nav-link>
-                    <x-nav-link :href="route('wallet.index')" :active="request()->routeIs('wallet.index')">
-                        Wallet List
-                    </x-nav-link>
                     <x-nav-link :href="route('record.create')" :active="request()->routeIs('record.create')">
                         Add Record
                     </x-nav-link>
                     <x-nav-link :href="route('record.index')" :active="request()->routeIs('record.index')">
                         Record List
+                    </x-nav-link>
+                    <x-nav-link :href="route('wallet.index')" :active="request()->routeIs('wallet.index')">
+                        Reporting
                     </x-nav-link>
                 </div>
             </div>
