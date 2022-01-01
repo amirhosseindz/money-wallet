@@ -68,6 +68,6 @@ class RecordController extends Controller
             $selectedWallet = $wallets->first();
         }
 
-        return $selectedWallet;
+        return $selectedWallet ?? new Wallet;
     }
 }

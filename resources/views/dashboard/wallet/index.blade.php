@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-dashboard.header :title="'List of Your Wallets'"/>
+    <x-dashboard.header :title="'Your Wallets'"/>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
